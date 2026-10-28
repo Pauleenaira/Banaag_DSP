@@ -1,0 +1,9 @@
+flask
+numpy
+scipy
+soundfile
+torch
+transformers
+jiwer
+# optional: lets you upload m4a and other formats (also install ffmpeg on your computer)
+librosa

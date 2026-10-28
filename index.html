@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Banaag</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,800;1,700&family=Fredoka:wght@500;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--side:#34522f;--bg:#d9d6c3;--card:#f7f0df;--tile:#ede4cd;--pill:#e3d8bb;--ink:#34522f;--text:#3a4a35;--btn:#46703b;--dis:#8a9b87;--raw:#555;--clean:#2e8b3d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:600 16px/1.5 Nunito,system-ui,sans-serif}
+[hidden]{display:none!important}
+h1,h2,h3{margin:0}
+h2{font:700 24px Fredoka,sans-serif;color:var(--ink)}
+button{font:inherit;cursor:pointer}
+button:focus-visible,label:focus-within{outline:3px solid var(--ink);outline-offset:2px}
+.app{display:grid;grid-template-columns:287px 1fr;min-height:100vh}
+.side{background:var(--side);color:var(--card);padding:28px 18px;display:flex;flex-direction:column;gap:22px;font-size:14px}
+.logo{display:flex;align-items:center;gap:10px;font:600 36px Fraunces,serif;letter-spacing:.06em}
+.logo svg{width:34px;height:44px}
+.tag{font-style:italic;margin:-10px 0 0}
+.side p{margin:0;text-align:justify}
+.team{margin-top:auto;text-align:center;line-height:1.7}
+main{padding:40px;display:flex}
+section.view{width:100%}
+.v1,.v2{display:grid;grid-template-columns:1fr 340px;gap:28px;align-items:start;max-width:1100px;margin:auto}
+.card{background:var(--card);border-radius:28px;padding:24px}
+.drop{border:1px solid #222;border-radius:44px;min-height:600px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;text-align:center;transition:background .2s,border-color .2s}
+.drop.over{background:#efe6c9;border:2px dashed var(--ink)}
+.drop svg{width:96px;height:96px;stroke:var(--ink)}
+.drop h2{font-size:36px}
+.btn{border:0;border-radius:999px;background:var(--btn);color:var(--card);font:800 18px Nunito,sans-serif;padding:14px 32px;transition:filter .2s,transform .15s}
+.btn:hover:not(:disabled){filter:brightness(1.12);transform:translateY(-1px)}
+.btn:disabled{background:var(--dis);cursor:not-allowed}
+.btn.wide{width:100%;margin-top:18px;font-size:22px;letter-spacing:.04em}
+.ref{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:16px;cursor:pointer;text-align:center}.ref small{font-size:13px}.btn.alt{background:var(--tile);color:var(--ink);font-size:15px;padding:10px 20px}.err{color:#9b2c2c;margin:0;min-height:1.4em}
+.steps{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:22px}
+.steps li{display:flex;gap:14px;align-items:center}
+.steps b{width:52px;height:52px;border-radius:12px;background:var(--ink);color:var(--card);display:grid;place-items:center;font:800 24px Nunito;flex:none}
+.bar{height:14px;background:#d9cbad;border-radius:99px;overflow:hidden;margin:6px 0 14px}
+.bar i{display:block;height:100%;width:0;background:var(--ink);border-radius:99px;transition:width .4s}
+.row2{display:flex;justify-content:space-between;font-size:15px}
+.stages{list-style:none;margin:0;padding:18px;background:var(--tile);border-radius:22px;display:grid;gap:14px}
+.st{display:grid;grid-template-columns:46px 1fr auto;align-items:center;gap:16px;font-size:19px;opacity:.55}
+.st i{width:46px;height:46px;border-radius:50%;border:4px solid #d9cbad}
+.st.done{opacity:1}.st.done i{background:var(--ink);border-color:var(--ink);display:grid;place-items:center}
+.st.done i::after{content:"✓";color:var(--card);font-size:24px}
+.st.run{opacity:1}.st.run i{border-top-color:var(--ink);animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #d9cbad;font-size:15px}
+.kv:last-child{border:0}.kv b{color:var(--ink);text-align:right;word-break:break-all}
+.v3{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start;width:100%}
+.col{display:grid;gap:24px;min-width:0}
+.waves{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+.tile{background:var(--tile);border:1px solid var(--ink);border-radius:14px;padding:10px 12px}
+.tile .h{display:flex;justify-content:space-between;align-items:center;font-size:14px}
+.tile canvas{width:100%;height:110px;display:block}
+.round{width:30px;height:30px;border-radius:50%;border:0;background:var(--ink);color:var(--card);display:grid;place-items:center;padding:0;transition:transform .15s}
+.round:hover{transform:scale(1.1)}
+.tl{margin-top:12px;background:var(--tile);border-radius:18px;padding:8px;max-height:460px;overflow:auto;display:grid;gap:4px}
+.seg{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;text-align:left;border:1px solid transparent;background:none;color:var(--text);border-radius:14px;padding:12px 16px;transition:background .2s}
+.seg:hover{background:#f3ead2}
+.seg time{background:var(--pill);border-radius:99px;padding:3px 12px;font-weight:800;font-size:14px;white-space:nowrap}
+.seg.on{background:var(--card);border-color:#8aa57d}.seg.on time{background:var(--ink);color:var(--card)}
+.metric{display:flex;align-items:center;gap:18px;margin-top:20px}
+.metric>div:first-child{width:76px;height:76px;border-radius:18px;background:var(--tile);display:grid;place-items:center;flex:none}
+.metric small{display:block;font-size:15px}
+.metric strong{font:italic 700 34px Fraunces,serif;color:var(--ink)}
+.acts{display:grid;gap:12px}
+.act{border:0;border-radius:18px;background:var(--tile);color:var(--ink);font:800 16px Nunito;padding:16px;display:flex;gap:12px;align-items:center;justify-content:center;transition:background .2s}
+.act:hover{background:var(--pill)}
+.note{font-size:13px;margin:6px 0 0}
+@media (max-width:980px){.app{grid-template-columns:1fr}.side{padding:20px}.team{margin-top:0}main{padding:20px}.v1,.v2,.v3{grid-template-columns:1fr}.drop{min-height:380px}.waves{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+ <div class="logo"><svg viewBox="0 0 34 44" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><path d="M3 16v12M9 8v28M15 2v40M21 10v24M27 15v14M32 19v6"/></svg>BANAAG</div>
+ <p class="tag">Defeating noise. Delivering Clarity</p>
+ <p>Banaag cleans noisy Cebuano speech recordings with band-pass filtering, spectral subtraction and Wiener filtering, then transcribes the result with OpenAI Whisper so you can compare accuracy before and after.</p>
+ <div class="team">Group 1 Members:<br><br>Adia, James Russel<br>Magistrado, Aira Pauleen<br>Peñas, John Patrick<br>San Juan, Edson Ray<br>Santos, Ma. Kassandra Nicole<br><br>CPE41S2</div>
+</aside>
+<main>
+
+<section class="view v1" id="v1">
+ <label class="card drop" id="drop" style="cursor:pointer">
+  <svg viewBox="0 0 96 96" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><circle cx="48" cy="48" r="42"/><path d="M48 66V30M34 43l14-14 14 14M36 68h24"/></svg>
+  <h2>Drop your audio here</h2>
+  <span class="btn">Choose file</span>
+  <span id="fname">WAV, MP3, M4A or FLAC</span>
+  <p class="err" id="err" role="alert"></p>
+  <input type="file" id="file" accept="audio/*" hidden>
+ </label>
+ <div>
+  <div class="card"><h2>What happens</h2>
+   <ol class="steps">
+    <li><b>1</b>Load and convert to 16 kHz mono</li>
+    <li><b>2</b>Clean it with band-pass, spectral subtraction and Wiener filters</li>
+    <li><b>3</b>Transcribe with Whisper</li>
+    <li><b>4</b>Score with SNR and WER</li>
+   </ol></div>
+  <label class="ref"><input type="file" id="ref" accept=".txt,text/plain" hidden><span class="btn alt">+ Reference transcript (.txt)</span><small id="refname">Optional · found automatically if saved in /references</small></label>
+  <button class="btn wide" id="start" disabled>START</button>
+ </div>
+</section>
+
+<section class="view v2" id="v2" hidden>
+ <div class="card"><h2>Processing….</h2>
+  <div class="row2"><b id="pct">0% complete</b><span id="eta"></span></div>
+  <div class="bar"><i id="bar"></i></div>
+  <ul class="stages" id="stages"></ul></div>
+ <div>
+  <div class="card"><h2>Audio details</h2>
+   <div class="kv"><span>File name</span><b id="dn"></b></div>
+   <div class="kv"><span>Length</span><b id="dl"></b></div>
+   <div class="kv"><span>Original</span><b id="do"></b></div>
+   <div class="kv"><span>Processing as</span><b>16 kHz · mono</b></div></div>
+  <button class="btn wide" id="cancel" style="background:var(--dis)">CANCEL</button>
+ </div>
+</section>
+
+<section class="view v3" id="v3" hidden>
+ <div class="col">
+  <div class="card"><h2>Waveforms</h2>
+   <div class="waves">
+    <div class="tile"><div class="h"><span>Raw Audio Input</span><button class="round" id="pr" aria-label="Play raw audio"></button></div><canvas id="c1" role="img" aria-label="Raw waveform"></canvas></div>
+    <div class="tile"><div class="h"><span>Processed audio output</span><button class="round" id="pp" aria-label="Play processed audio"></button></div><canvas id="c2" role="img" aria-label="Processed waveform"></canvas></div>
+   </div>
+   <p class="note" id="demo" hidden>Demo mode: no backend found, so only the band-pass stage was applied in your browser. Run app.py for the full pipeline.</p></div>
+  <div class="card"><h2>Transcript</h2><div class="tl" id="tl"></div></div>
+ </div>
+ <div class="col">
+  <div class="card"><h2>Results</h2>
+   <div class="metric"><div><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#34522f" stroke-width="2" stroke-linecap="round"><path d="M4 10v4M8 6v12M12 3v18M16 7v10M20 10v4"/></svg></div><div><small>Signal-to-noise</small><strong id="snr">—</strong><small id="snrNote" class="note"></small></div></div>
+   <div class="metric"><div><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#34522f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div><div><small>Word error rate</small><strong id="wer">—</strong><small id="werNote" class="note"></small></div></div></div>
+  <div class="card acts">
+   <button class="act" id="play">▶ Play Processed Audio</button>
+   <button class="act" id="dt">⤓ Download Transcript</button>
+   <button class="act" id="da">♫ Download Processed Audio</button>
+   <button class="act" id="again">⤒ Upload Audio</button>
+  </div>
+ </div>
+</section>
+
+</main>
+</div>
+<script>
+const $=id=>document.getElementById(id),wait=ms=>new Promise(r=>setTimeout(r,ms));
+const AC=window.AudioContext||window.webkitAudioContext;
+const STAGES=["Loading audio","Converting to 16 kHz mono","Band-pass filter","Spectral subtraction","Wiener filter","Transcribing with Whisper","Calculating SNR and WER"];
+const S={file:null,raw:null,proc:null,res:null,cancel:false,job:null,demo:false};
+let ctx,node=null,active=null,t0=0,off=0,raf=0,pr=0,N=140,rawP=[],procP=[];
+const fmt=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(Math.floor(s%60)).padStart(2,'0');
+function show(n){['v1','v2','v3'].forEach((v,i)=>$(v).hidden=i!==n-1);scrollTo(0,0)}
+
+/* ---------- screen 1: pick a file ---------- */
+const fi=$('file'),dz=$('drop');
+function pick(f){if(!f)return;S.file=f;$('fname').textContent=f.name;$('start').disabled=false;$('err').textContent=''}
+fi.onchange=()=>pick(fi.files[0]);
+$('ref').onchange=()=>{S.ref=$('ref').files[0]||null;$('refname').textContent=S.ref?S.ref.name:'Optional · found automatically if saved in /references'};
+['dragenter','dragover'].forEach(e=>dz.addEventListener(e,x=>{x.preventDefault();dz.classList.add('over')}));
+['dragleave','drop'].forEach(e=>dz.addEventListener(e,x=>{x.preventDefault();dz.classList.remove('over')}));
+dz.addEventListener('drop',x=>pick(x.dataTransfer.files[0]));
+
+/* ---------- screen 2: processing ---------- */
+STAGES.forEach((t,i)=>$('stages').insertAdjacentHTML('beforeend',`<li class="st" id="s${i}"><i></i><span>${t}</span><b></b></li>`));
+function paint(cur,times){
+ STAGES.forEach((_,i)=>{const e=$('s'+i);e.className='st '+(i<cur?'done':i===cur?'run':'');
+  e.querySelector('b').textContent=i<cur?'Done '+(times[i]||0).toFixed(1)+' s':i===cur?'Working…':''});
+ const done=times.slice(0,cur).reduce((a,b)=>a+b,0),avg=cur?done/cur:3,pct=Math.round(cur/STAGES.length*100);
+ $('pct').textContent=pct+'% complete';$('bar').style.width=pct+'%';
+ $('eta').textContent=cur>=STAGES.length?'Finishing up':'About '+Math.round((STAGES.length-cur)*avg)+' sec left'}
+function fail(m){show(1);$('err').textContent=m}
+
+$('start').onclick=async()=>{
+ S.cancel=false;S.job=null;stop();ctx=ctx||new AC();paint(0,[]);show(2);
+ try{S.raw=await ctx.decodeAudioData(await S.file.arrayBuffer())}
+ catch(e){return fail('Could not read that file. Try a WAV, MP3, M4A or FLAC.')}
+ $('dn').textContent=S.file.name;$('dl').textContent=fmt(S.raw.duration);
+ $('do').textContent=Math.round(S.raw.sampleRate/1000)+' kHz · '+(S.raw.numberOfChannels>1?'stereo':'mono');
+ try{if(!await runServer())await runDemo()}
+ catch(e){if(e==='cancel')return;return fail(e.message||'Processing failed')}
+ finish()};
+$('cancel').onclick=()=>{S.cancel=true;if(S.job)fetch('/api/jobs/'+S.job,{method:'DELETE'}).catch(()=>{});show(1)};
+
+/* real backend (app.py): returns false if none is reachable */
+async function runServer(){
+ let r;try{const fd=new FormData();fd.append('file',S.file);if(S.ref)fd.append('reference',S.ref);r=await fetch('/api/jobs',{method:'POST',body:fd});if(!r.ok)return false}catch(e){return false}
+ S.job=(await r.json()).id;S.demo=false;
+ for(;;){if(S.cancel)throw 'cancel';
+  const j=await(await fetch('/api/jobs/'+S.job)).json();
+  if(j.error)throw new Error(j.error);paint(j.stage,j.times||[]);
+  if(j.done){S.res=j.result;S.proc=await ctx.decodeAudioData(await(await fetch(j.result.audio_url)).arrayBuffer());paint(7,j.times);return true}
+  await wait(600)}}
+
+/* standalone demo: real band-pass in the browser, other stages are simulated */
+async function runDemo(){
+ S.demo=true;const times=[];
+ const step=async(i,fn,ms)=>{if(S.cancel)throw 'cancel';paint(i,times);const t=performance.now();await Promise.all([fn?fn():0,wait(ms)]);times[i]=(performance.now()-t)/1000};
+ await step(0,0,500);await step(1,0,700);
+ await step(2,async()=>{const oc=new OfflineAudioContext(1,S.raw.length,S.raw.sampleRate),s=oc.createBufferSource();s.buffer=S.raw;
+  const hp=oc.createBiquadFilter(),lp=oc.createBiquadFilter();hp.type='highpass';hp.frequency.value=300;lp.type='lowpass';lp.frequency.value=3400;
+  s.connect(hp);hp.connect(lp);lp.connect(oc.destination);s.start();S.proc=await oc.startRendering()},900);
+ await step(3,0,900);await step(4,0,900);await step(5,0,1100);await step(6,0,500);paint(7,times);
+ const r=S.raw.getChannelData(0),p=S.proc.getChannelData(0);let a=0,b=0;
+ for(let i=0;i<p.length;i+=4){a+=p[i]*p[i];const d=r[i]-p[i];b+=d*d}
+ const d=S.raw.duration,L=["Demo mode: start app.py and open http://localhost:5000 to get a real transcript.","Each line covers a ten second window of the recording.","Click a line to jump to that part of the processed audio."];
+ S.res={snr_db:10*Math.log10(a/(b||1e-12)),snr_note:'Demo estimate from the band-pass only',wer:null,segments:Array.from({length:Math.min(8,Math.ceil(d/10))},(_,i)=>({start:i*10,end:Math.min(d,(i+1)*10),text:L[i%3]}))}}
+
+/* ---------- screen 3: results ---------- */
+function peaks(buf,mx){const ch=buf.getChannelData(0),step=Math.floor(ch.length/N)||1,o=[];
+ for(let i=0;i<N;i++){let m=0;for(let j=i*step;j<(i+1)*step&&j<ch.length;j+=8)m=Math.max(m,Math.abs(ch[j]));o.push(Math.max(.03,m/(mx||1)))}return o}
+function drawOne(cv,data,col,p){
+ const r=cv.getBoundingClientRect(),d=devicePixelRatio||1;cv.width=r.width*d;cv.height=r.height*d;
+ const x=cv.getContext('2d');x.scale(d,d);const w=r.width/N,m=r.height/2;x.lineCap='round';x.lineWidth=Math.max(1.5,w*.55);
+ data.forEach((v,i)=>{const px=i*w+w/2;x.strokeStyle=col;x.globalAlpha=p>0&&i/N>p?.35:1;x.beginPath();x.moveTo(px,m-v*m*.92);x.lineTo(px,m+v*m*.92);x.stroke()});
+ x.globalAlpha=1;if(p>0){x.fillStyle='#222';x.fillRect(p*r.width-1,0,2,r.height)}}
+const draw=()=>{if($('v3').hidden)return;drawOne($('c1'),rawP,'#555',active==='raw'?pr:0);drawOne($('c2'),procP,'#2e8b3d',active==='proc'?pr:0)};
+addEventListener('resize',draw);
+
+function finish(){
+ const r=S.res;let mx=0;const c=S.raw.getChannelData(0);for(let i=0;i<c.length;i+=8)mx=Math.max(mx,Math.abs(c[i]));
+ rawP=peaks(S.raw,mx);procP=peaks(S.proc,mx);
+ $('snr').textContent=r.snr_db.toFixed(1)+' dB';
+ $('wer').textContent=r.wer==null?'—':Math.round(r.wer)+'%';
+ $('snrNote').textContent=r.snr_note||'';
+ $('werNote').textContent=S.demo?'Run app.py to calculate WER':r.wer==null?'No reference found. Add one on the upload screen, or save a .txt named like your audio in the references folder.':(r.wer_baseline!=null?'Was '+Math.round(r.wer_baseline)+'% before cleaning'+(r.ref_name?' · reference: '+r.ref_name:''):'');
+ $('demo').hidden=!S.demo;
+ $('tl').innerHTML=r.segments.map((s,i)=>`<button class="seg" data-i="${i}"><time>${fmt(s.start)} - ${fmt(s.end)}</time><span>${s.text}</span></button>`).join('');
+ $('tl').querySelectorAll('.seg').forEach(b=>b.onclick=()=>play('proc',r.segments[b.dataset.i].start));
+ ui();show(3);draw()}
+
+/* ---------- playback (one track at a time) ---------- */
+const PLAY='<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 3l15 9-15 9z"/></svg>',PAUSE='<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 3h4v18H6zM14 3h4v18h-4z"/></svg>';
+function ui(){
+ $('pr').innerHTML=active==='raw'?PAUSE:PLAY;$('pp').innerHTML=active==='proc'?PAUSE:PLAY;
+ $('play').textContent=active==='proc'?'❚❚ Stop Processed Audio':'▶ Play Processed Audio'}
+function stop(){if(node){node.onended=null;try{node.stop()}catch(e){}node=null}cancelAnimationFrame(raf);active=null;pr=0;ui();mark();draw()}
+function play(kind,at=0){
+ stop();ctx.resume();const b=kind==='raw'?S.raw:S.proc,s=ctx.createBufferSource();
+ s.buffer=b;s.connect(ctx.destination);off=at;t0=ctx.currentTime;s.onended=stop;s.start(0,at);node=s;active=kind;ui();tick()}
+function tick(){if(!active)return;const b=active==='raw'?S.raw:S.proc;pr=Math.min(1,(off+ctx.currentTime-t0)/b.duration);mark();draw();raf=requestAnimationFrame(tick)}
+function mark(){const t=active?pr*(active==='raw'?S.raw:S.proc).duration:-1;
+ document.querySelectorAll('.seg').forEach((e,i)=>{const s=S.res.segments[i];e.classList.toggle('on',t>=s.start&&t<s.end)})}
+const toggle=k=>active===k?stop():play(k);
+$('pr').onclick=()=>toggle('raw');$('pp').onclick=()=>toggle('proc');$('play').onclick=()=>toggle('proc');
+
+/* ---------- downloads ---------- */
+function save(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+const base=()=>S.file.name.replace(/\.[^.]+$/,'');
+$('dt').onclick=()=>save(new Blob([S.res.segments.map(s=>`[${fmt(s.start)} - ${fmt(s.end)}] ${s.text}`).join('\n')],{type:'text/plain'}),base()+'_transcript.txt');
+function wav(b){const n=b.length,d=b.getChannelData(0),o=new DataView(new ArrayBuffer(44+n*2)),w=(p,s)=>[...s].forEach((c,i)=>o.setUint8(p+i,c.charCodeAt(0)));
+ w(0,'RIFF');o.setUint32(4,36+n*2,true);w(8,'WAVEfmt ');o.setUint32(16,16,true);o.setUint16(20,1,true);o.setUint16(22,1,true);
+ o.setUint32(24,b.sampleRate,true);o.setUint32(28,b.sampleRate*2,true);o.setUint16(32,2,true);o.setUint16(34,16,true);w(36,'data');o.setUint32(40,n*2,true);
+ for(let i=0;i<n;i++)o.setInt16(44+i*2,Math.max(-1,Math.min(1,d[i]))*32767,true);return new Blob([o],{type:'audio/wav'})}
+$('da').onclick=()=>save(wav(S.proc),base()+'_cleaned.wav');
+$('again').onclick=()=>{stop();S.file=null;S.ref=null;$('ref').value='';$('refname').textContent='Optional · found automatically if saved in /references';fi.value='';$('fname').textContent='WAV, MP3, M4A or FLAC';$('start').disabled=true;show(1)};
+ui();
+</script>
+</body>
+</html>
