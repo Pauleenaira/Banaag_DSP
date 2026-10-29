@@ -1,0 +1,53 @@
+# =======================================================
+# BANAAG - .gitignore
+# =======================================================
+
+# 1. Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# 2. Local Backup / Reference Folders
+backend_reference/
+
+# 3. Audio & Dataset Directories (heavy audio files should not be in Git)
+work/
+test_samples/
+cebuano_dataset/
+*.wav
+*.mp3
+*.flac
+*.m4a
+*.ogg
+
+# 4. Machine Learning Models & Weights (Hugging Face / PyTorch)
+.cache/
+checkpoints/
+*.pt
+*.bin
+*.safetensors
+*.onnx
+
+# 5. Python Bytecode & Runtime Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# 6. Environment & Secret Files
+.env
+.env.local
+*.log
+
+# 7. IDE, Editor & OS Metadata
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+Desktop.ini

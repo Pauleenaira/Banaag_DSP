@@ -1,9 +1,15 @@
-flask
-numpy
-scipy
-soundfile
-torch
-transformers
-jiwer
-# optional: lets you upload m4a and other formats (also install ffmpeg on your computer)
+fastapi>=0.110.0
+uvicorn>=0.28.0
+python-multipart>=0.0.9
+numpy>=1.26.0
+scipy>=1.12.0
+soundfile>=0.12.1
+torch>=2.4.0
+transformers>=4.48.0
+accelerate>=1.0.0
+jiwer>=3.0.0
+# Optional: helps load compressed browser audio (m4a, webm) with ffmpeg
 librosa
+# Optional: for extracting datasets from Hugging Face
+datasets
+
